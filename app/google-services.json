@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "185471152072",
+    "firebase_url": "https://my-inbox-d7bef.firebaseio.com",
+    "project_id": "my-inbox-d7bef",
+    "storage_bucket": "my-inbox-d7bef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185471152072:android:e2fe2735fa755e6e",
+        "android_client_info": {
+          "package_name": "com.gmail.reebrando.myinbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185471152072-mvd6flu4v6qta7cv0i98uaik9ne1b79o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB53FMunS8VU5Tb5TvfJiqQfERpie0sqIc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
