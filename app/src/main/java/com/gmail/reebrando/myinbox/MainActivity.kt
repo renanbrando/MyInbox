@@ -1,6 +1,5 @@
 package com.gmail.reebrando.myinbox
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -9,9 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import com.ramotion.foldingcell.FoldingCell
-import com.ramotion.foldingcell.views.FoldingCellView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -21,14 +17,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        val fc = findViewById<FoldingCell>(R.id.folding_cell) as FoldingCell
-        fc.initialize(1000, Color.DKGRAY, 2);
-        fc.setOnClickListener(View.OnClickListener {
-            fun onClick(){
-                fc.toggle(false)
-            }
-        })
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
