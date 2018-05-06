@@ -8,6 +8,7 @@ import java.util.*
 data class Caixa
 (
     // Identificador daquela carta a ser retirada
+    var id: Number,
     var dataChegada: Date,
     var quantidade: Number,
     var retirada: Boolean,

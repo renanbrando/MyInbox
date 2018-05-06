@@ -1,5 +1,6 @@
 package com.gmail.reebrando.myinbox.model
 
+import java.net.InetAddress
 import java.util.*
 
 /**
@@ -7,8 +8,10 @@ import java.util.*
  */
 data class Endereco
 (
+    var id: Number,
     var logradouro: String,
     var bairro: String,
     var latitude: Double,
-    var longitude: Double
+    var longitude: Double,
+    var numeroMacAddress: InetAddress
 )

@@ -1,6 +1,5 @@
 package com.gmail.reebrando.myinbox.model
 
-import java.net.InetAddress
 import java.util.*
 
 /**
@@ -8,8 +7,9 @@ import java.util.*
  */
 data class Dispositivo
 (
+    var id: Number,
     var dataUltimaTrocaBateria: Date,
-    var numeroMacAddress: InetAddress,
+    var percentualBateria: Double,
     var idUsuario: Number,
     var idEndereco: Number
 )

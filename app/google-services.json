@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "185471152072-mpsf6u4mvsjibbjmneso9pnf61pbas7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.reebrando.myinbox",
+            "certificate_hash": "06e352af84756521d5343ad27e04ae2448962dd7"
+          }
+        },
+        {
           "client_id": "185471152072-mvd6flu4v6qta7cv0i98uaik9ne1b79o.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185471152072-mvd6flu4v6qta7cv0i98uaik9ne1b79o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
