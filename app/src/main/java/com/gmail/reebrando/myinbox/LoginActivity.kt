@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import android.widget.Toast
 import android.util.Log
 import android.text.TextUtils
 import android.content.Intent
+import android.view.WindowManager
 import com.gmail.reebrando.myinbox.model.Usuario
 import com.google.firebase.database.FirebaseDatabase
 
@@ -20,6 +20,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_login)
 
         btn_email_sign_in.setOnClickListener(this)
@@ -42,8 +44,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val i = view!!.id
 
         when (i) {
-            R.id.btn_email_create_account -> criarConta(edtEmail.text.toString(), edtPassword.text.toString())
             R.id.btn_email_sign_in -> conectarUsuario(edtEmail.text.toString(), edtPassword.text.toString())
+            R.id.btn_email_create_account -> criarConta(edtEmail.text.toString(), edtPassword.text.toString())
 //            R.id.btn_sign_out -> desconectarUsuario()
 //            R.id.btn_test_message -> abrirApp()
         }
@@ -78,6 +80,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun conectarUsuario(email: String, password: String) {
+
         Log.e(TAG, "conectarUsuario: " + email)
         if (!validarInformacoes(email, password)) {
             return
@@ -165,8 +168,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun abrirApp() {
-        //startActivity(Intent(this, MainActivity::class.java))
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

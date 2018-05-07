@@ -35,4 +35,13 @@
         </menu>
     </item>
 
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/signOut"
+                android:icon="@drawable/shutdown_24"
+                android:title="Desconectar" />
+        </menu>
+    </item>
+
 </menu>
