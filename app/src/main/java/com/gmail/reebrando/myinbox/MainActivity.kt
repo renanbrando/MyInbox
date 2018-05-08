@@ -6,17 +6,32 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
+import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
+import android.widget.TextView
+
+
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var mqttHelper: MqttHelper
+
+    lateinit var dataReceived: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        dataReceived = findViewById(R.id.label) as TextView
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -29,6 +44,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        startMqtt()
+    }
+
+    private fun startMqtt() {
+        mqttHelper = MqttHelper(applicationContext)
+        mqttHelper.setCallback(object : MqttCallbackExtended {
+            override fun connectComplete(b: Boolean, s: String) {
+
+            }
+
+            override fun connectionLost(throwable: Throwable) {
+
+            }
+
+            @Throws(Exception::class)
+            override fun messageArrived(topic: String, mqttMessage: MqttMessage) {
+                Log.w("Debug", mqttMessage.toString())
+                dataReceived.setText(mqttMessage.toString())
+            }
+
+            override fun deliveryComplete(iMqttDeliveryToken: IMqttDeliveryToken) {
+
+            }
+        })
     }
 
     override fun onBackPressed() {
