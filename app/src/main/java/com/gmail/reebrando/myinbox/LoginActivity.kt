@@ -24,8 +24,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                              WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_login)
 
-        btn_email_sign_in.setOnClickListener(this)
-        btn_email_create_account.setOnClickListener(this)
+        btnEmailSignIn.setOnClickListener(this)
+        btnEmailCreateAccount.setOnClickListener(this)
 
 //        btn_sign_out.setOnClickListener(this)
 //        btn_test_message.setOnClickListener(this)
@@ -44,8 +44,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val i = view!!.id
 
         when (i) {
-            R.id.btn_email_sign_in -> conectarUsuario(edtEmail.text.toString(), edtPassword.text.toString())
-            R.id.btn_email_create_account -> criarConta(edtEmail.text.toString(), edtPassword.text.toString())
+            R.id.btnEmailSignIn -> conectarUsuario(edtEmail.text.toString(), edtPassword.text.toString())
+            R.id.btnEmailCreateAccount -> criarConta(edtEmail.text.toString(), edtPassword.text.toString())
 //            R.id.btn_sign_out -> desconectarUsuario()
 //            R.id.btn_test_message -> abrirApp()
         }
@@ -86,18 +86,29 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        btnEmailSignIn.isEnabled = false
+        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button_disabled)
+        btnEmailCreateAccount.isEnabled = false
+        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button_disabled)
+
         mAuth!!.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
+
                     if (task.isSuccessful) {
 
                         Log.e(TAG, "conectarUsuario: Sucesso!")
 
                         // atualiza tela com informações do usuário conectado
-                        val usuario = mAuth!!.currentUser
+//                        val usuario = mAuth!!.currentUser
                         abrirApp()
 //                        atualizaTela(usuario)
 
                     } else {
+
+                        btnEmailSignIn.isEnabled = true
+                        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button)
+                        btnEmailCreateAccount.isEnabled = true
+                        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button)
 
                         Log.e(TAG, "conectarUsuario: Falhou!", task.exception)
                         Toast.makeText(applicationContext, "Falha na autenticação!", Toast.LENGTH_SHORT).show()

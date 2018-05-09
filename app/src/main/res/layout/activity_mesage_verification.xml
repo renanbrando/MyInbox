@@ -25,20 +25,21 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-
+                android:id="@+id/btnSim"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@drawable/ic_new_mensage" />
 
             <ImageButton
-
+                android:id="@+id/btnNao"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@drawable/none_mensage" />
         </LinearLayout>
             <Button
+                android:id="@+id/btnDepois"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="confirmar depois" />

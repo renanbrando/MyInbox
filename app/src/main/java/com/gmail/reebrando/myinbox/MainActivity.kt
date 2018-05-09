@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -20,7 +21,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setSupportActionBar(toolbar)
+//        getSupportActionBar()?.hide()
+//        setSupportActionBar(toolbar)
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -40,8 +42,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
         }
     }
 
@@ -62,31 +62,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
 
-            }
-            R.id.nav_slideshow -> {
+        try {
+            // Handle navigation view item clicks here.
+            when (item.itemId) {
+                R.id.navMarcarCorrespondencia -> {
+                    startActivity(Intent(this, MesageVerificationActivity::class.java))
+                }
+                R.id.nav_share -> {
 
-            }
-            R.id.nav_manage -> {
+                }
+                R.id.nav_send -> {
 
+                }
+                R.id.signOut -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    mAuth!!.signOut()
+                    this.finish()
+                }
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
-            R.id.signOut -> {
-                startActivity(Intent(this, LoginActivity::class.java))
-                mAuth!!.signOut()
-                this.finish()
-            }
+        }
+        catch (e: Exception){
+             Toast.makeText(applicationContext, e.message, Toast.LENGTH_SHORT).show()
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

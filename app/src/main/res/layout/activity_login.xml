@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:background="#5fb0c9"
     android:orientation="vertical"
+    android:clipToPadding="false"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <TextView
@@ -14,6 +15,7 @@
         android:text="MyInbox"
         android:textColor="#fff"
         android:textSize="26sp"
+        android:elevation="15dp"
         android:layout_marginTop="50dp"
         android:textStyle="bold" />
 
@@ -25,7 +27,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="70dp"
         android:background="#fff"
-        android:elevation="4dp"
+        android:elevation="8dp"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -44,6 +46,8 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/email_16"
                     android:drawableTint="#FF4081"
+                    android:paddingBottom="10dp"
+                    android:drawablePadding="10dp"
                     android:singleLine="true"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress" />
@@ -57,6 +61,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    android:drawablePadding="10dp"
                     android:singleLine="true"
                     android:drawableLeft="@drawable/lock_16"
                     android:drawableTint="#FF4081"
@@ -83,7 +89,7 @@
                 android:layout_marginBottom="24dp">
 
                 <Button
-                    android:id="@+id/btn_email_sign_in"
+                    android:id="@+id/btnEmailSignIn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -97,7 +103,7 @@
                     android:textSize="18sp"/>
 
                 <Button
-                    android:id="@+id/btn_email_create_account"
+                    android:id="@+id/btnEmailCreateAccount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -215,7 +221,7 @@
             <!--android:paddingRight="16dp">-->
 
             <!--<Button-->
-                <!--android:id="@+id/btn_email_sign_in"-->
+                <!--android:id="@+id/btnEmailSignIn"-->
                 <!--android:layout_width="0dp"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_marginLeft="4dp"-->
@@ -224,7 +230,7 @@
                 <!--android:text="Sign In" />-->
 
             <!--<Button-->
-                <!--android:id="@+id/btn_email_create_account"-->
+                <!--android:id="@+id/btnEmailCreateAccount"-->
                 <!--android:layout_width="0dp"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_marginLeft="4dp"-->
