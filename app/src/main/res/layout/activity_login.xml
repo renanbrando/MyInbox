@@ -66,8 +66,26 @@
                     android:singleLine="true"
                     android:drawableLeft="@drawable/lock_16"
                     android:drawableTint="#FF4081"
-                    android:hint="Password"
+                    android:hint="Senha"
                     android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtConfirmPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/check_pass_16"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="#FF4081"
+                    android:hint="Confirme sua senha"
+                    android:inputType="textPassword"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="20dp"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView

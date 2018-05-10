@@ -24,6 +24,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                              WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_login)
 
+        edtConfirmPassword.visibility = View.GONE
+
         btnEmailSignIn.setOnClickListener(this)
         btnEmailCreateAccount.setOnClickListener(this)
 
@@ -45,36 +47,46 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         when (i) {
             R.id.btnEmailSignIn -> conectarUsuario(edtEmail.text.toString(), edtPassword.text.toString())
-            R.id.btnEmailCreateAccount -> criarConta(edtEmail.text.toString(), edtPassword.text.toString())
-//            R.id.btn_sign_out -> desconectarUsuario()
-//            R.id.btn_test_message -> abrirApp()
+            R.id.btnEmailCreateAccount -> {
+                if (edtConfirmPassword.visibility == View.GONE) {
+                    edtConfirmPassword.visibility = View.VISIBLE
+                    return
+                }
+                criarConta(edtEmail.text.toString(), edtPassword.text.toString(), edtConfirmPassword.text.toString())
+            }
         }
     }
 
-    private fun criarConta(email: String, password: String) {
+    private fun criarConta(email: String, password: String, checkPassword: String) {
         Log.e(TAG, "criarConta: " + email)
 
-        if (!validarInformacoes(email, password)) {
+        if (!validarInformacoes(email, password, checkPassword, true)) {
             return
         }
+
+        desabilitarBotoes()
 
         mAuth!!.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-
                         Log.e(TAG, "criarConta: Sucesso!")
 
-                        // atualiza tela com informações do usuário conectado.
                         val usuario = mAuth!!.currentUser
-                        //atualizaTela(usuario)
                         adicionarNovoUsuario(usuario!!.uid, obterUsernamePeloEmail(usuario.email), usuario.email)
+                        Toast.makeText(applicationContext, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
+                        abrirApp()
 
                     } else {
 
                         Log.e(TAG, "criarConta: Falhou!", task.exception)
-                        Toast.makeText(applicationContext, "Falha na autenticação!", Toast.LENGTH_SHORT).show()
-                        //atualizaTela(null)
 
+                        var message = task.exception.toString()
+
+                        if (message.contains("already")) message = "E-mail já cadastrado! Informe outro..."
+
+                        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+
+                        habilitarBotoes()
                     }
         }
     }
@@ -82,14 +94,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun conectarUsuario(email: String, password: String) {
 
         Log.e(TAG, "conectarUsuario: " + email)
-        if (!validarInformacoes(email, password)) {
+        if (!validarInformacoes(email, password, "", false)) {
             return
         }
 
-        btnEmailSignIn.isEnabled = false
-        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button_disabled)
-        btnEmailCreateAccount.isEnabled = false
-        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button_disabled)
+        desabilitarBotoes()
 
         mAuth!!.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
@@ -101,14 +110,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         // atualiza tela com informações do usuário conectado
 //                        val usuario = mAuth!!.currentUser
                         abrirApp()
-//                        atualizaTela(usuario)
 
                     } else {
 
-                        btnEmailSignIn.isEnabled = true
-                        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button)
-                        btnEmailCreateAccount.isEnabled = true
-                        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button)
+                        habilitarBotoes()
 
                         Log.e(TAG, "conectarUsuario: Falhou!", task.exception)
                         Toast.makeText(applicationContext, "Falha na autenticação!", Toast.LENGTH_SHORT).show()
@@ -121,12 +126,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 }
     }
 
-    private fun desconectarUsuario() {
-        mAuth!!.signOut()
-//        atualizaTela(null)
-    }
-
-    private fun validarInformacoes(email: String, password: String): Boolean {
+    private fun validarInformacoes(email: String, password: String, confirmPassword: String, criacaoUsuario: Boolean): Boolean {
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Favor informar um e-mail válido.", Toast.LENGTH_SHORT).show()
             return false
@@ -142,28 +142,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             return false
         }
 
+        if (criacaoUsuario) {
+
+            if (TextUtils.isEmpty(confirmPassword)) {
+                Toast.makeText(applicationContext, "Confirme a senha!", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            if (!TextUtils.equals(password, confirmPassword)) {
+                Toast.makeText(applicationContext, "As senhas informadas não conferem.", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+
         return true
     }
-
-//    private fun atualizaTela(user: FirebaseUser?) {
-//        if (user != null) {
-//            tvStatus.text = "Email: " + user.email
-//            tvDetail.text = "Firebase User ID: " + user.uid
-//
-//            email_password_buttons.visibility = View.GONE
-//            email_password_fields.visibility = View.GONE
-//            layout_signed_in_buttons.visibility = View.VISIBLE
-//
-//        } else {
-//
-//            tvStatus.text = "Desconectado"
-//            tvDetail.text = null
-//
-//            email_password_buttons.visibility = View.VISIBLE
-//            email_password_fields.visibility = View.VISIBLE
-//            layout_signed_in_buttons.visibility = View.GONE
-//        }
-//    }
 
     private fun adicionarNovoUsuario(id: String, nome: String?, email: String?) {
         val usuario = Usuario(id, nome, email, null)
@@ -176,6 +169,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             email
         }
+    }
+
+    private fun desabilitarBotoes(){
+        btnEmailSignIn.isEnabled = false
+        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button_disabled)
+        btnEmailCreateAccount.isEnabled = false
+        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button_disabled)
+    }
+
+    private fun habilitarBotoes(){
+        btnEmailSignIn.isEnabled = true
+        btnEmailSignIn.setBackgroundResource(R.drawable.rounded_button)
+        btnEmailCreateAccount.isEnabled = true
+        btnEmailCreateAccount.setBackgroundResource(R.drawable.rounded_button)
     }
 
     private fun abrirApp() {
