@@ -1,6 +1,11 @@
 package com.gmail.reebrando.myinbox;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -13,18 +18,21 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://m20.cloudmqtt.com:18350";
+    //final String serverUri = "tcp://m11.cloudmqtt.com:17730";
+    final String serverUri = "tcp://iot.eclipse.org:1883";
 
-    final String clientId = "ExampleAndroidClient";
-    final String subscriptionTopic = "sensor/inbox";
+    final String clientId = "MyInbox";
+    final String subscriptionTopic = "myinboxfiap";
 
-    final String username = "groqyzeg";
-    final String password = "NParCYoXhYfb";
+    final String username = "kjvshrmd";
+    final String password = "igvW2Fk91kAz";
 
-    public MqttHelper(Context context){
+    public MqttHelper(final Context context) {
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -54,12 +62,12 @@ public class MqttHelper {
         mqttAndroidClient.setCallback(callback);
     }
 
-    private void connect(){
+    private void connect() {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+        //mqttConnectOptions.setUserName(username);
+        //mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
 
@@ -83,7 +91,7 @@ public class MqttHelper {
             });
 
 
-        } catch (MqttException ex){
+        } catch (MqttException ex) {
             ex.printStackTrace();
         }
     }
@@ -94,7 +102,7 @@ public class MqttHelper {
             mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subscribed!");
+                    Log.w("Mqtt", "Subscribed!");
                 }
 
                 @Override
