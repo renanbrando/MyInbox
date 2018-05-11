@@ -1,7 +1,14 @@
-package com.gmail.reebrando.myinbox;
+package com.gmail.reebrando.myinbox.Helpers;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.gmail.reebrando.myinbox.Model.Mensagem;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -16,20 +23,43 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://m20.cloudmqtt.com:18350";
+//    final String serverUri = "tcp://m20.cloudmqtt.com:18350";
+//
+//    final String clientId = "ExampleAndroidClient";
+//    final String subscriptionTopic = "sensor/inbox";
+//
+//    final String username = "groqyzeg";
+//    final String password = "NParCYoXhYfb";
 
-    final String clientId = "ExampleAndroidClient";
-    final String subscriptionTopic = "sensor/inbox";
+    final String TAG = "Mqtt";
+    private String REQUIRED = "Required";
 
-    final String username = "groqyzeg";
-    final String password = "NParCYoXhYfb";
+    private FirebaseUser user = null;
+
+    private DatabaseReference mDatabase = null;
+    private DatabaseReference mMessageReference = null;
+    private ValueEventListener mMessageListener = null;
+
+    final String serverUri = "tcp://m10.cloudmqtt.com:16053";
+
+    final String clientId = "MyInbox";
+    final String subscriptionTopic = "myinboxfiap";
+
+    final String username = "beofembx";
+    final String password = "QZ1lSO0uAaCe";
 
     public MqttHelper(Context context){
+
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mMessageReference = FirebaseDatabase.getInstance().getReference("message");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
-                Log.w("mqtt", s);
+                Log.w(TAG, s);
             }
 
             @Override
@@ -39,7 +69,8 @@ public class MqttHelper {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("Mqtt", mqttMessage.toString());
+                Log.w(TAG, mqttMessage.toString());
+                writeMessageInDB(topic,mqttMessage);
             }
 
             @Override
@@ -47,6 +78,7 @@ public class MqttHelper {
 
             }
         });
+
         connect();
     }
 
@@ -77,7 +109,7 @@ public class MqttHelper {
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
+                    Log.w(TAG, "Failed to connect to: " + serverUri + exception.toString());
                 }
             });
         } catch (MqttException ex){
@@ -90,17 +122,24 @@ public class MqttHelper {
             mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subscribed!");
+                    Log.w(TAG,"Subscribed!");
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt", "Subscribed fail!");
+                    Log.w(TAG, "Subscribed fail!");
                 }
             });
         } catch (MqttException ex) {
             System.err.println("Exceptionst subscribing");
             ex.printStackTrace();
+        }
+    }
+
+    public void writeMessageInDB(String topic, MqttMessage mqttMessage){
+        if (mqttMessage.toString().toUpperCase().equals("My Inbox")){
+            Mensagem mensagem = new Mensagem(topic, mqttMessage.toString());
+            mMessageReference.setValue(mensagem);
         }
     }
 }

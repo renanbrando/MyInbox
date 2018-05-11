@@ -10,7 +10,7 @@ import android.util.Log
 import android.text.TextUtils
 import android.content.Intent
 import android.view.WindowManager
-import com.gmail.reebrando.myinbox.model.Usuario
+import com.gmail.reebrando.myinbox.Model.Usuario
 import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         Log.e(TAG, "criarConta: Sucesso!")
 
                         val usuario = mAuth!!.currentUser
-                        adicionarNovoUsuario(usuario!!.uid, obterUsernamePeloEmail(usuario.email), usuario.email)
+                        adicionarNovoUsuario(usuario!!.uid, obterUsernamePeloEmail(usuario.email), usuario.email, password)
                         Toast.makeText(applicationContext, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show()
                         abrirApp()
 
@@ -158,8 +158,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
 
-    private fun adicionarNovoUsuario(id: String, nome: String?, email: String?) {
-        val usuario = Usuario(id, nome, email, null)
+    private fun adicionarNovoUsuario(id: String, nome: String?, email: String?, senha: String) {
+        val usuario = Usuario(id, nome, email, senha)
         FirebaseDatabase.getInstance().reference.child("usuario").child(id).setValue(usuario)
     }
 

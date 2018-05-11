@@ -1,4 +1,4 @@
-package com.gmail.reebrando.myinbox.model
+package com.gmail.reebrando.myinbox.Model
 
 import java.util.*
 

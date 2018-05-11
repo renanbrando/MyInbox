@@ -1,4 +1,4 @@
-package com.gmail.reebrando.myinbox
+package com.gmail.reebrando.myinbox.Services
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,6 +7,8 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.support.v4.app.NotificationCompat
 import android.util.Log
+import com.gmail.reebrando.myinbox.MainActivity
+import com.gmail.reebrando.myinbox.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -32,7 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(body: String?) {
-        var intent = Intent(this,MainActivity::class.java)
+        var intent = Intent(this, MainActivity::class.java)
         //If set, and the activity being launched is already running in the current task,
         //then instead of launching a new instance of that activity, all of the other activities
         // on top of it will be closed and this Intent will be delivered to the (now on top)

@@ -1,7 +1,6 @@
-package com.gmail.reebrando.myinbox.model
+package com.gmail.reebrando.myinbox.Model
 
 import java.net.InetAddress
-import java.util.*
 
 /**
  * Created by Rodrigo on 05/05/2018.
