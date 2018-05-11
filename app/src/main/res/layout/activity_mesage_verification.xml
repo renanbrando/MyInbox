@@ -4,45 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gmail.reebrando.myinbox.MesageVerificationActivity">
+    tools:context="com.gmail.reebrando.myinbox.MesageVerificationActivity"
+    android:background="#5fb0c9">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:layout_marginTop="30dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Voce recebeu  a carta?"
+            android:layout_marginTop="80dp"
+            android:elevation="15dp"
+            android:text="Você recebeu a carta?"
             android:textAlignment="center"
-            android:textSize="40sp"
+            android:textColor="#fff"
+            android:textSize="26sp"
             android:textStyle="bold"
+
             />
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="45dp"
+            android:background="#5fb0c9"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="186dp"
+            android:layout_height="194dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginVertical="5dp"
+            android:background="#d67601"
+            android:orientation="horizontal">
 
             <ImageButton
+
                 android:id="@+id/btnSim"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/ic_new_mensage" />
 
+            <LinearLayout
+                android:layout_width="235dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#5fb0c9"
+                android:orientation="horizontal"></LinearLayout>
+
             <ImageButton
                 android:id="@+id/btnNao"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/none_mensage" />
+                android:background="@drawable/negative" />
         </LinearLayout>
-            <Button
-                android:id="@+id/btnDepois"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="confirmar depois" />
+
+        <Button
+            android:id="@+id/btnDepois"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:background="@drawable/rounded_button"
+            android:text="confirmar depois"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:layout_marginTop="50dp"/>
     </LinearLayout>
 
 
