@@ -20,6 +20,10 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
@@ -38,7 +42,6 @@ public class MqttHelper {
 
     private DatabaseReference mDatabase = null;
     private DatabaseReference mMessageReference = null;
-    private ValueEventListener mMessageListener = null;
 
     final String serverUri = "tcp://m10.cloudmqtt.com:16053";
 
@@ -137,8 +140,12 @@ public class MqttHelper {
     }
 
     public void writeMessageInDB(String topic, MqttMessage mqttMessage){
-        if (mqttMessage.toString().toUpperCase().equals("My Inbox")){
-            Mensagem mensagem = new Mensagem(topic, mqttMessage.toString());
+        if (mqttMessage.toString().toUpperCase().equals("NEW INBOX")){
+            Date chegada = new Date();
+            Mensagem mensagem = new Mensagem(
+                    topic, mqttMessage.toString(), chegada,
+                    0, false,null,null
+            );
             mMessageReference.setValue(mensagem);
         }
     }
