@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/colorPrimaryDark"
     tools:context=".SplashActivity">
 
     <ImageView
@@ -17,7 +18,7 @@
         android:layout_height="150dp"
         android:id="@+id/splash"
         android:contentDescription="@string/app_name"
-        android:background="@mipmap/ic_launcher" />
+        android:background="@mipmap/ic_launcher_round" />
 
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:textAlignment="center"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         android:layout_marginTop="50dp"
         android:id="@+id/tvName"/>
 
