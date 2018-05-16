@@ -1,4 +1,4 @@
-package com.gmail.reebrando.myinbox;
+package com.gmail.reebrando.myinbox.helpers;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -23,8 +23,8 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    //final String serverUri = "tcp://m11.cloudmqtt.com:17730";
-    final String serverUri = "tcp://iot.eclipse.org:1883";
+    final String serverUri = "tcp://m11.cloudmqtt.com:17730";
+    //final String serverUri = "tcp://iot.eclipse.org:1883";
 
     final String clientId = "MyInbox";
     final String subscriptionTopic = "myinboxfiap";
@@ -66,8 +66,8 @@ public class MqttHelper {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        //mqttConnectOptions.setUserName(username);
-        //mqttConnectOptions.setPassword(password.toCharArray());
+        mqttConnectOptions.setUserName(username);
+        mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
 

@@ -1,4 +1,4 @@
-package com.gmail.reebrando.myinbox
+package com.gmail.reebrando.myinbox.services
 
 import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId
