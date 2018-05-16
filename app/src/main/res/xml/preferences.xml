@@ -11,10 +11,10 @@
         android:summary="Pick a ringtone you like"
         android:title="Ringtone Preference" />
     <EditTextPreference
-        android:dialogTitle="Enter a text"
-        android:key="text"
-        android:summary="Click to show a text entry dialog"
-        android:title="EditText Preference" />
+        android:dialogTitle="Enter the device MAC address"
+        android:key="mac"
+        android:summary="Click to show your device information"
+        android:title="MAC Address" />
     <ListPreference
         android:dialogTitle="Select duration"
         android:entries="@array/settings_list_preference_titles"

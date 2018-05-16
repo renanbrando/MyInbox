@@ -79,7 +79,7 @@ class SettingsActivity : AppCompatActivity() {
             addPreferencesFromResource(R.xml.preferences)
 
             bindPreferenceSummaryToValue(findPreference("ringtone"))
-            bindPreferenceSummaryToValue(findPreference("text"))
+            bindPreferenceSummaryToValue(findPreference("mac"))
             bindPreferenceSummaryToValue(findPreference("list"))
 
         }

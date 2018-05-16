@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab.setOnClickListener { view ->
             val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-            Snackbar.make(view, prefs.getString("text", "<unset>"), Snackbar.LENGTH_LONG)
+            Snackbar.make(view, prefs.getString("mac", "<unset>"), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
 
 
@@ -106,7 +106,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_about -> {
-
+                val fragment = AboutFragment.newInstance()
+                replaceFragment(fragment)
             }
             R.id.nav_logout -> {
                 FirebaseAuth.getInstance().signOut()
