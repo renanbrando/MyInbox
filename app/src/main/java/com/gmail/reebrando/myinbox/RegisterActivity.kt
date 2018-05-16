@@ -50,11 +50,12 @@ class RegisterActivity : AppCompatActivity() {
                             val registerRef = dbRef.child("user").child(userId)
                             val user = User(displayName.text.toString(), status.text.toString())
                             registerRef.setValue(user).addOnSuccessListener(){
+                                toast("User created")
                                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }
-                            toast("User created")
+
                         }
                     }
         }
