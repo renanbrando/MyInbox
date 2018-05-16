@@ -2,32 +2,27 @@ package com.gmail.reebrando.myinbox
 
 import android.content.Context
 import android.content.Intent
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Bundle
-import android.preference.ListPreference
-import android.preference.Preference
 import android.preference.PreferenceManager
-import android.preference.RingtonePreference
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import com.gmail.reebrando.myinbox.utils.NotificationUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import android.widget.TextView
-import com.gmail.reebrando.myinbox.helpers.MqttHelper
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var context: Context
+    private val mNotificationTime = Calendar.getInstance().timeInMillis + 1000 //Set after 1 seconds from the current time.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +30,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         context = applicationContext
+
+        NotificationUtils().setNotification(mNotificationTime, this, "Incoming!!!!!", "You got a new inbox")
 
 
         fab.setOnClickListener { view ->
@@ -96,7 +93,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_inbox -> {
-
+                val fragment = MainFragment.newInstance()
+                replaceFragment(fragment)
             }
             R.id.nav_settings -> {
                 val intent = Intent(this@MainActivity, SettingsActivity::class.java)

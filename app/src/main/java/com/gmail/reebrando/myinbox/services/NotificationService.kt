@@ -97,7 +97,7 @@ class NotificationService : IntentService("NotificationService") {
                         // Set the intent that will fire when the user taps the notification
                         .setContentIntent(pendingIntent)
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
+                        .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher_round))
                         .setAutoCancel(true)
                         .setContentTitle(title)
                         .setStyle(Notification.BigTextStyle()
@@ -109,7 +109,7 @@ class NotificationService : IntentService("NotificationService") {
                         // Set the intent that will fire when the user taps the notification
                         .setContentIntent(pendingIntent)
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
+                        .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher_round))
                         .setAutoCancel(true)
                         .setPriority(Notification.PRIORITY_MAX)
                         .setContentTitle(title)
