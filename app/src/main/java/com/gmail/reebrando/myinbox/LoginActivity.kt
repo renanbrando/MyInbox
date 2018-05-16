@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseException
@@ -15,104 +17,35 @@ import java.util.concurrent.TimeUnit.*
 
 class LoginActivity : AppCompatActivity() {
 
-    var mAuth: FirebaseAuth? = null
-    var mobileNumber: String = ""
-    var verificationID: String = ""
-    var token_: String = ""
+    private lateinit var auth: FirebaseAuth
+    private lateinit var loginButton: Button
+    private lateinit var email: EditText
+    private lateinit var password: EditText
+    private lateinit var registerButtton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        mAuth = FirebaseAuth.getInstance()
 
-        btnSignIn.setOnClickListener {
+        email = findViewById(R.id.email) as EditText
+        password = findViewById(R.id.password) as EditText
+        loginButton = findViewById(R.id.loginButton) as Button
+        registerButtton = findViewById(R.id.registerButton) as Button
 
-            mobileNumber = etNumber.text.toString()
-
-            if (mobileNumber.length > 0) {
-                progressBar.visibility = View.VISIBLE
-                loginTask()
-            } else {
-                etNumber.setError("Enter valid phone number")
-            }
-        }
-    }
-
-    private fun loginTask() {
-
-        var mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            override fun onVerificationCompleted(credential: PhoneAuthCredential?) {
-                if (credential != null) {
-                    signInWithPhoneAuthCredential(credential)
-                }
-            }
-
-            override fun onVerificationFailed(p0: FirebaseException?) {
-                progressBar.visibility = View.GONE
-                toast("Invalid phone number or verification failed.")
-            }
-
-            override fun onCodeSent(verificationId: String?, token: PhoneAuthProvider.ForceResendingToken?) {
-                super.onCodeSent(verificationId, token)
-                progressBar.visibility = View.GONE
-                verificationID = verificationId.toString()
-                token_ = token.toString()
-
-                etNumber.setText("")
-
-                etNumber.setHint("Enter OTP ")
-                btnSignIn.setText("Verify OTP")
-
-                btnSignIn.setOnClickListener {
-                    progressBar.visibility = View.VISIBLE
-                    verifyAuthentication(verificationID, etNumber.text.toString())
-                }
-
-                Log.e("Login : verificationId ", verificationId)
-                Log.e("Login : token ", token_)
-
-            }
-
-            override fun onCodeAutoRetrievalTimeOut(verificationId: String?) {
-                super.onCodeAutoRetrievalTimeOut(verificationId)
-                progressBar.visibility = View.GONE
-                toast("Time out")
-            }
+        registerButtton.setOnClickListener{
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                mobileNumber,            // Phone number to verify
-                60,                  // Timeout duration
-                SECONDS,        // Unit of timeout
-                this,                // Activity (for callback binding)
-                mCallBacks)
-
-    }
-
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-
-        mAuth!!.signInWithCredential(credential)
-                .addOnCompleteListener(this@LoginActivity, object : OnCompleteListener<AuthResult> {
-                    override fun onComplete(task: Task<AuthResult>) {
-                        if (task.isSuccessful()) {
-                            val user = task.getResult().getUser()
-                            progressBar.visibility = View.GONE
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-
-                        } else {
-                            if (task.getException() is FirebaseAuthInvalidCredentialsException) {
-                                progressBar.visibility = View.GONE
-                                toast("Invalid OPT")
-                            }
-                        }
+        loginButton.setOnClickListener{
+            auth = FirebaseAuth.getInstance()
+            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).
+                    addOnCompleteListener { task: Task<AuthResult> ->
+                        val intentToMain = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intentToMain)
                     }
-                })
-    }
 
-    private fun verifyAuthentication(verificationID: String, otpText: String) {
-
-        val phoneAuthCredential = PhoneAuthProvider.getCredential(verificationID, otpText) as PhoneAuthCredential
-        signInWithPhoneAuthCredential(phoneAuthCredential)
+        }
     }
 }
