@@ -2,13 +2,20 @@ package com.gmail.reebrando.myinbox
 
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
+import android.preference.ListPreference
+import android.preference.Preference
+import android.preference.PreferenceManager
+import android.preference.RingtonePreference
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,18 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var mqttHelper: MqttHelper
-
-    lateinit var dataReceived: TextView
-
     lateinit var context: Context
-
-    companion object {
-        @JvmStatic fun onNewIntent(context: Context): Intent {
-            val intent = Intent(context, MainActivity.javaClass)
-            return intent
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +38,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+            Snackbar.make(view, prefs.getString("text", "<unset>"), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+
+
+            //prefs.getBoolean("checkbox", false).toString()
+            //prefs.getString("ringtone", "<unset>")
+            //prefs.getString("text", "<unset>")
+            //prefs.getString("list", "<unset>")
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -92,10 +96,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_inbox -> {
-                // Handle the camera action
+
             }
             R.id.nav_settings -> {
-
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 
