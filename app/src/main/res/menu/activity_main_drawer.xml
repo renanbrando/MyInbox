@@ -8,10 +8,10 @@
             android:id="@+id/navMarcarCorrespondencia"
             android:icon="@drawable/caixa_correio_com_carta_24"
             android:title="Marcar correspondência" />
-        <!--<item-->
-            <!--android:id="@+id/nav_gallery"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Gallery" />-->
+        <item
+            android:id="@+id/navListarHistorico"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Histórico" />
         <!--<item-->
             <!--android:id="@+id/nav_slideshow"-->
             <!--android:icon="@drawable/ic_menu_slideshow"-->

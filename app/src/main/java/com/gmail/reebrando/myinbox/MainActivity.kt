@@ -108,6 +108,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.navMarcarCorrespondencia -> {
                     startActivity(Intent(this, MesageVerificationActivity::class.java))
                 }
+                R.id.navListarHistorico -> {
+                    startActivity(Intent(this, ListInboxActivity::class.java))
+                }
                 R.id.nav_share -> {
 
                 }

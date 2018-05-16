@@ -8,26 +8,26 @@ import java.util.*
  */
 class Mensagem {
 
-    //lateinit var id: String
+    companion object Factory {
+        fun create(): Mensagem = Mensagem()
+    }
+
+    var id: String? = null
     var topico: String? = null
     var texto: String? = null
-    var dataChegada: Date? = null;
-    var quantidade: Number = 0;
-    var retirada: Boolean = false;
-    var dataRetirada: Date? = null;
-    var observacao: String? = null;
-
-    constructor(){}
-
-    constructor(topico: String?, texto: String?, dataChegada: Date, quantidade: Number,
-                retirada: Boolean, dataRetirada: Date?, observacao: String?)
-    {
-        this.topico = topico
-        this.texto = texto
-        this.dataChegada = dataChegada
-        this.quantidade = quantidade
-        this.retirada = retirada
-        this.dataRetirada = dataRetirada
-        this.observacao = observacao
-    }
+    var dataChegada: String? = null
+    var retirada: Boolean = false
+    var dataRetirada: String? = null
+//
+//    constructor(){}
+//
+//    constructor(topico: String?, texto: String?, dataChegada: String,
+//                retirada: Boolean, dataRetirada: String?, observacao: String?)
+//    {
+//        this.topico = topico
+//        this.texto = texto
+//        this.dataChegada = dataChegada
+//        this.retirada = retirada
+//        this.dataRetirada = dataRetirada
+//    }
 }

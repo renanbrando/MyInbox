@@ -140,12 +140,17 @@ public class MqttHelper {
     }
 
     public void writeMessageInDB(String topic, MqttMessage mqttMessage){
+
         if (mqttMessage.toString().toUpperCase().equals("NEW INBOX")){
+
             Date chegada = new Date();
-            Mensagem mensagem = new Mensagem(
-                    topic, mqttMessage.toString(), chegada,
-                    0, false,null,null
-            );
+            Mensagem mensagem = new Mensagem();
+
+            mensagem.setTopico(topic);
+            mensagem.setDataChegada(chegada.toString());
+            mensagem.setDataRetirada(null);
+            mensagem.setTexto(mqttMessage.toString());
+
             mMessageReference.setValue(mensagem);
         }
     }
