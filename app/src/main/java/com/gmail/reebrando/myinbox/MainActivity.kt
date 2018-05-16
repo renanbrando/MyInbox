@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.widget.TextView
 import com.gmail.reebrando.myinbox.helpers.MqttHelper
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -101,6 +102,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_about -> {
 
+            }
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent_ = Intent(this@MainActivity, LoginActivity::class.java)
+                intent_.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent_.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent_)
+                finish()
             }
         }
 

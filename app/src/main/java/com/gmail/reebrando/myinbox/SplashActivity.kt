@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
             tv.startAnimation(animText)
         }
         Handler().postDelayed(Runnable {
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
             startActivity(intent)
             this@SplashActivity.finish()
