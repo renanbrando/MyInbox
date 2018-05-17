@@ -146,10 +146,10 @@ public class MqttHelper {
             Date chegada = new Date();
             Mensagem mensagem = new Mensagem();
 
-            mensagem.setTopico(topic);
-            mensagem.setDataChegada(chegada.toString());
-            mensagem.setDataRetirada(null);
-            mensagem.setTexto(mqttMessage.toString());
+            String newItem = mDatabase.child("message").push().getKey();
+            mensagem.setId(newItem);
+            mensagem.setNovoCorreio("Novo Correio");
+//            mensagem.setDataChegada(chegada.toString());
 
             mMessageReference.setValue(mensagem);
         }

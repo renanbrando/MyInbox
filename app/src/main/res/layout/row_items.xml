@@ -12,39 +12,51 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/tvDataChegada"
+        android:id="@+id/tvNovoCorreio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/cbRetirada"
         android:layout_toRightOf="@+id/cbRetirada"
         android:layout_marginLeft="10dp"
-        android:text="01/01/2018"
+        android:text="newInbox"
         android:textColor="#000000"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tvDataRetirada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/tvDataChegada"
-        android:layout_toRightOf="@+id/tvDataChegada"
-        android:text="07/01/2018"
-        android:layout_marginLeft="10dp"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/tvDataChegada"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toEndOf="@+id/tvNovoCorreio"-->
+        <!--android:layout_toRightOf="@+id/tvNovoCorreio"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:text="01/01/2018"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="20sp" />-->
 
-    <ImageButton
-        android:id="@+id/ivExcluir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvDataRetirada"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@android:color/transparent"
-        android:gravity="end"
-        app:srcCompat="@android:drawable/btn_dialog" />
+    <!--<TextView-->
+        <!--android:id="@+id/tvDataRetirada"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toEndOf="@+id/tvDataChegada"-->
+        <!--android:layout_toRightOf="@+id/tvDataChegada"-->
+        <!--android:text="07/01/2018"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="20sp" />-->
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/ivExcluir"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/tvDataRetirada"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:gravity="end"-->
+        <!--app:srcCompat="@android:drawable/btn_dialog" />-->
 
 </RelativeLayout>

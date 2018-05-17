@@ -12,12 +12,11 @@ class Mensagem {
         fun create(): Mensagem = Mensagem()
     }
 
-    var id: String? = null
-    var topico: String? = null
-    var texto: String? = null
-    var dataChegada: String? = null
-    var retirada: Boolean = false
-    var dataRetirada: String? = null
+    lateinit var id: String
+    var novoCorreio: String? = null
+//    var dataChegada: String? = null
+//    var retirada: Boolean = false
+//    var dataRetirada: String? = null
 //
 //    constructor(){}
 //

@@ -24,9 +24,10 @@ class ListItemsAdapter(context: Context, messageItemList: MutableList<Mensagem>)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-        val dataChegada: String? = itemList.get(position).dataChegada
-        val retirada: Boolean = itemList.get(position).retirada
-        val dataRetirada: String? = itemList.get(position).dataRetirada
+        val novoCorreio: String? = itemList.get(position).novoCorreio
+//        val dataChegada: String? = itemList.get(position).dataChegada
+//        val retirada: Boolean = itemList.get(position).retirada
+//        val dataRetirada: String? = itemList.get(position).dataRetirada
 
         val view: View
         val vh: ListRowHolder
@@ -40,9 +41,10 @@ class ListItemsAdapter(context: Context, messageItemList: MutableList<Mensagem>)
             vh = view.tag as ListRowHolder
         }
 
-        vh.retirada.isChecked = retirada
-        vh.dataChegada.text = dataChegada
-        vh.dataRetirada.text = dataRetirada
+        vh.novoCorreio.text = novoCorreio
+//        vh.retirada.isChecked = retirada
+//        vh.dataChegada.text = dataChegada
+//        vh.dataRetirada.text = dataRetirada
 
 //        vh.retirada.setOnClickListener {
 //            rowListener.modifyItemState(id, !done) }
@@ -62,9 +64,10 @@ class ListItemsAdapter(context: Context, messageItemList: MutableList<Mensagem>)
     }
     private class ListRowHolder(row: View?) {
 
-        val dataChegada: TextView = row!!.findViewById<TextView>(R.id.tvDataChegada) as TextView
-        val retirada: CheckBox = row!!.findViewById<CheckBox>(R.id.cbRetirada) as CheckBox
-        val dataRetirada: TextView = row!!.findViewById<TextView>(R.id.tvDataChegada) as TextView
-        val ibExclusao: ImageButton = row!!.findViewById<ImageButton>(R.id.ivExcluir) as ImageButton
+        val novoCorreio: TextView = row!!.findViewById<TextView>(R.id.tvNovoCorreio) as TextView
+//        val dataChegada: TextView = row!!.findViewById<TextView>(R.id.tvDataChegada) as TextView
+//        val retirada: CheckBox = row!!.findViewById<CheckBox>(R.id.cbRetirada) as CheckBox
+//        val dataRetirada: TextView = row!!.findViewById<TextView>(R.id.tvDataChegada) as TextView
+//        val ibExclusao: ImageButton = row!!.findViewById<ImageButton>(R.id.ivExcluir) as ImageButton
     }
 }
