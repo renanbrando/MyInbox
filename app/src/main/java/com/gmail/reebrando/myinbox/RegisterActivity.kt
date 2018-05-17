@@ -21,6 +21,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var status: EditText
     private lateinit var email: EditText
     private lateinit var password: EditText
+    private lateinit var cPassword: EditText
     private lateinit var registerButton: Button
     private lateinit var backLoginLink: TextView
     private lateinit var auth: FirebaseAuth
@@ -39,25 +40,27 @@ class RegisterActivity : AppCompatActivity() {
         status = findViewById(R.id.status) as EditText
         email = findViewById(R.id.emailRegister) as EditText
         password = findViewById(R.id.passwordRegister) as EditText
+        cPassword = findViewById(R.id.cPasswordRegister) as EditText
         registerButton = findViewById(R.id.registerActionButton) as Button
         backLoginLink = findViewById(R.id.backLoginLink) as TextView
 
         registerButton.setOnClickListener(){
-            auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString()).
-                    addOnCompleteListener { task: Task<AuthResult> ->
-                        if (task.isSuccessful){
-                            val userId = auth.currentUser?.uid
-                            val registerRef = dbRef.child("user").child(userId)
-                            val user = User(displayName.text.toString(), status.text.toString())
-                            registerRef.setValue(user).addOnSuccessListener(){
-                                toast("User created")
-                                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }
-
+            if (validate()) {
+                auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener { task: Task<AuthResult> ->
+                    if (task.isSuccessful) {
+                        val userId = auth.currentUser?.uid
+                        val registerRef = dbRef.child("user").child(userId)
+                        val user = User(displayName.text.toString(), status.text.toString())
+                        registerRef.setValue(user).addOnSuccessListener() {
+                            toast("User created")
+                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
+
                     }
+                }
+            }
         }
 
         backLoginLink.setOnClickListener(){
@@ -67,5 +70,44 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun validate(): Boolean {
+        var valid = true
+
+        val displayNameText = displayName.text.toString()
+        val emailText = email.text.toString()
+        val passwordText = password.text.toString()
+        val cPasswordText = cPassword.text.toString()
+
+        if (displayNameText.isEmpty()) {
+            displayName.error = getString(R.string.valid_display_name)
+            valid = false
+        } else {
+            displayName.error = null
+        }
+
+        if (emailText.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+            email.error = getString(R.string.valid_address)
+            valid = false
+        } else {
+            email.error = null
+        }
+
+        if (passwordText.isEmpty() || passwordText.length < 4 || passwordText.length > 10) {
+            password.error = getString(R.string.between_chars)
+            valid = false
+        } else {
+            password.error = null
+        }
+
+        if (cPasswordText.isEmpty() || cPasswordText.length < 4 || cPasswordText.length > 10 || cPasswordText != passwordText) {
+            cPassword.error = getString(R.string.match_email)
+            valid = false
+        } else {
+            cPassword.error = null
+        }
+
+        return valid
     }
 }

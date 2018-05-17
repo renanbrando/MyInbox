@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
                     android:hint="User Name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -59,8 +59,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#FF4081"
-                    android:hint="User Name"
-                    android:inputType="textEmailAddress"
+                    android:hint="User text"
+                    android:inputType="text"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -74,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableTint="#FF4081"
-                    android:hint="Password"
-                    android:inputType="numberPassword"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -90,7 +90,22 @@
                     android:layout_marginTop="16dp"
                     android:drawableTint="#FF4081"
                     android:hint="Password"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/cPasswordRegister"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableTint="#FF4081"
+                    android:hint="Password confirmation"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 

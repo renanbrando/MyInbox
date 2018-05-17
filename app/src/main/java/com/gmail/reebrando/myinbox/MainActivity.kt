@@ -110,8 +110,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent_ = Intent(this@MainActivity, LoginActivity::class.java)
-                intent_.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                intent_.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent_.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent_.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent_)
                 finish()
             }

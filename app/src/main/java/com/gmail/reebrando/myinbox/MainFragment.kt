@@ -1,13 +1,8 @@
 package com.gmail.reebrando.myinbox
 
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.media.RingtoneManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +11,6 @@ import android.widget.Button
 import android.widget.TextView
 import com.gmail.reebrando.myinbox.helpers.MqttHelper
 import com.gmail.reebrando.myinbox.models.User
-import com.gmail.reebrando.myinbox.utils.NotificationUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -61,14 +55,6 @@ class MainFragment : Fragment() {
 
         displayName = view.findViewById(R.id.nameTextView) as TextView
         status = view.findViewById(R.id.statusTextView) as TextView
-        logout = view.findViewById(R.id.singoutButton) as Button
-
-        logout.setOnClickListener(){
-            auth.signOut()
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
-            //finish()
-        }
 
         isLogin()
 
