@@ -9,4 +9,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="valid_address">Invalid e-mail</string>
+    <string name="between_chars">E-mail must have between 4 and 10 chars</string>
+    <string name="valid_display_name">Invalid display name</string>
+    <string name="match_email">E-mails don\'t match</string>
 </resources>

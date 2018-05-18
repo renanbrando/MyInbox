@@ -9,16 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.gmail.reebrando.myinbox.config.Constants
 import com.gmail.reebrando.myinbox.helpers.MqttHelper
+import com.gmail.reebrando.myinbox.models.Inbox
 import com.gmail.reebrando.myinbox.models.User
+import com.gmail.reebrando.myinbox.utils.NotificationUtils
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
+import org.jetbrains.anko.toast
 import java.util.*
 
 
@@ -29,6 +30,7 @@ class MainFragment : Fragment() {
     private lateinit var logout: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
+    lateinit var mDatabase: DatabaseReference
 
     lateinit var dataReceived: TextView
     lateinit var mqttHelper: MqttHelper
@@ -52,6 +54,7 @@ class MainFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        mDatabase = FirebaseDatabase.getInstance().reference
 
         displayName = view.findViewById(R.id.nameTextView) as TextView
         status = view.findViewById(R.id.statusTextView) as TextView
@@ -104,8 +107,16 @@ class MainFragment : Fragment() {
                 Log.w("Debug", mqttMessage.toString())
                 dataReceived.setText(mqttMessage.toString())
 
-               // NotificationUtils().setNotification(mNotificationTime, this@MainFragment, mqttMessage.toString(), "You got a new inbox")
+                NotificationUtils().setNotification(mNotificationTime, activity!!.applicationContext, mqttMessage.toString(), "You got a new inbox")
 
+                val todoItem = Inbox.create()
+                todoItem.itemText = mqttMessage.toString()
+                todoItem.done = false
+                //We first make a push so that a new item is made with a unique ID
+                val newItem = mDatabase.child(Constants.FIREBASE_ITEM).push()
+                todoItem.objectId = newItem.key
+                //then, we used the reference to set the value on that ID
+                newItem.setValue(todoItem)
 
             }
 
