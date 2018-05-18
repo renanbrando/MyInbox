@@ -78,9 +78,11 @@ class SettingsActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.preferences)
 
-            bindPreferenceSummaryToValue(findPreference("ringtone"))
+            //bindPreferenceSummaryToValue(findPreference("ringtone"))
             bindPreferenceSummaryToValue(findPreference("mac"))
-            bindPreferenceSummaryToValue(findPreference("list"))
+            bindPreferenceSummaryToValue(findPreference("username"))
+            bindPreferenceSummaryToValue(findPreference("password"))
+            //bindPreferenceSummaryToValue(findPreference("list"))
 
         }
 

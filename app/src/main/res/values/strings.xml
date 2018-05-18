@@ -13,4 +13,5 @@
     <string name="between_chars">E-mail must have between 4 and 10 chars</string>
     <string name="valid_display_name">Invalid display name</string>
     <string name="match_email">E-mails don\'t match</string>
+    <string name="app_description">IOT project that receives a node mcu notification trough an eclipse broker that indicates if the user has received any inboxes</string>
 </resources>

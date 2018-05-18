@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
+    <!--<CheckBoxPreference
         android:key="checkbox"
         android:summary="Tap to check if on or off"
         android:title="Checkbox Preference" />
@@ -9,13 +9,23 @@
         android:showDefault="true"
         android:showSilent="true"
         android:summary="Pick a ringtone you like"
-        android:title="Ringtone Preference" />
+        android:title="Ringtone Preference" />-->
     <EditTextPreference
         android:dialogTitle="Enter the device MAC address"
         android:key="mac"
         android:summary="Click to show your device information"
-        android:title="MAC Address" />
-    <ListPreference
+        android:title="MAC Address (Topic)" />
+    <EditTextPreference
+        android:dialogTitle="Enter username for broker"
+        android:key="username"
+        android:summary="Click to show username"
+        android:title="Username" />
+    <EditTextPreference
+        android:dialogTitle="Enter password for broker"
+        android:key="password"
+        android:summary="Click to show password"
+        android:title="Password" />
+    <!--<ListPreference
         android:dialogTitle="Select duration"
         android:entries="@array/settings_list_preference_titles"
         android:entryValues="@array/settings_list_preference_values"
@@ -34,5 +44,5 @@
             android:action="com.gmail.reebrando.myinbox.SETTING_START_ACTIVITY"
             android:targetClass="com.gmail.reebrando.myinbox.MainActivity"
             android:targetPackage="com.gmail.reebrando.myinbox" />
-    </Preference>
+    </Preference>-->
 </PreferenceScreen>

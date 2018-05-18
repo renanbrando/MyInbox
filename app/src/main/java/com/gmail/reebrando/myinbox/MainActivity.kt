@@ -44,10 +44,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         fab.setOnClickListener { view ->
-            //val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+            val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-            //Snackbar.make(view, prefs.getString("mac", "<unset>"), Snackbar.LENGTH_LONG)
-                    //.setAction("Action", null).show()
+            Snackbar.make(view, prefs.getString("mac", "Not set!"), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
 
 
             //prefs.getBoolean("checkbox", false).toString()
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //prefs.getString("text", "<unset>")
             //prefs.getString("list", "<unset>")
 
-            addNewItemDialog()
+            //addNewItemDialog()
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -105,21 +105,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.

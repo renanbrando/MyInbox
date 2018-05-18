@@ -57,7 +57,6 @@ class MainFragment : Fragment() {
         mDatabase = FirebaseDatabase.getInstance().reference
 
         displayName = view.findViewById(R.id.nameTextView) as TextView
-        status = view.findViewById(R.id.statusTextView) as TextView
 
         isLogin()
 
@@ -76,8 +75,7 @@ class MainFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if(dataSnapshot.exists()){
                     var user: User = dataSnapshot.getValue(User::class.java)!!
-                    displayName.text = user.displayName
-                    status.text = user.status
+                    displayName.text = "Hello\n" + user.displayName
                 }
 
             }
@@ -92,7 +90,7 @@ class MainFragment : Fragment() {
     }
 
     private fun startMqtt() {
-        mqttHelper = MqttHelper(context)
+        mqttHelper = MqttHelper(context!!)
         mqttHelper.setCallback(object : MqttCallbackExtended {
             override fun connectComplete(b: Boolean, s: String) {
 
